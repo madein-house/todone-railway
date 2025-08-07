@@ -26,7 +26,6 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
-app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 
 // Create uploads directory
@@ -429,6 +428,9 @@ app.post('/api/email-webhook', upload.array('attachments'), async (req, res) => 
     res.status(500).json({ error: 'Email processing failed' });
   }
 });
+
+// Serve static files
+app.use(express.static('public'));
 
 // Serve the main page
 app.get('/', (req, res) => {
